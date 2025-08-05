@@ -8,7 +8,7 @@ from services.exporter import export_cleaned
 
 def main():
     # Load the synthetic data
-    df = load_reservations("data/generated_reservations.csv")
+    df = load_reservations("data/reservations.csv")
 
     # Transform fares
     df = convert_fares(df)
