@@ -1,8 +1,10 @@
-from src.data_loader import load_reservations
-from src.transformer import convert_fares, add_total
-from src.validator import validate_airports
-from src.cleaner import drop_duplicates
-from src.exporter import export_cleaned
+# This script is the main point of entry and processes flight reservation data.
+
+from services.data_loader import load_reservations
+from services.transformer import convert_fares, add_total
+from services.validator import validate_airports
+from services.cleaner import drop_duplicates
+from services.exporter import export_cleaned
 
 def main():
     # Load the synthetic data
