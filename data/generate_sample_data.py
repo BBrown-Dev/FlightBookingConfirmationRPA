@@ -28,4 +28,4 @@ data[10]['Fare'] = None
 data[25]['Passenger'] = None
 
 df = pd.DataFrame(data)
-df.to_csv('data/reservations.csv', index=False)
+df.to_csv('reservations.csv', index=False)
