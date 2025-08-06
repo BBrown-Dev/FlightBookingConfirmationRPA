@@ -5,10 +5,39 @@ import os
 import time
 import psutil
 import gc
+import cProfile
+import pstats
+import io
+from datetime import datetime
 
-# get a module-specific logger
+# Get a module-specific logger
 logger = logging.getLogger(__name__)
 
+# Profiling decorator to capture performance metrics
+def profile(func):
+    def wrapper(*args, **kwargs):
+        pr = cProfile.Profile()
+        pr.enable()
+        result = func(*args, **kwargs)
+        pr.disable()
+
+        # Dump raw stats
+        prof_file = f"profile_{func.__name__}_{datetime.now():%Y%m%d_%H%M%S}.prof"
+        pr.dump_stats(prof_file)
+
+        # Write top 20 to txt
+        s = io.StringIO()
+        stats = pstats.Stats(pr, stream=s).sort_stats("cumtime")
+        stats.print_stats(20)
+        txt_file = f"{func.__name__}_stats_{datetime.now():%Y%m%d_%H%M%S}.txt"
+
+        with open(txt_file, "w") as f:
+            f.write(s.getvalue())
+            return result
+
+    return wrapper
+
+@profile
 def export_cleaned(df, output_path):
     """
     Writes the cleaned DataFrame to CSV and logs metrics:
