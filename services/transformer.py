@@ -3,6 +3,7 @@
 import pandas as pd
 import logging
 
+# get a module-specific logger
 logger = logging.getLogger(__name__)
 
 def convert_fares(df):
@@ -11,7 +12,7 @@ def convert_fares(df):
     invalid_number = df["Fare"].isna().sum()
 
     if invalid_number:
-        logger.warning(f"{invalid_number} invalid fares coerced to NaN")
+        logger.warning("%d invalid fares coerced to NaN", invalid_number)
     df["Fare"].fillna(df["Fare"].median(), inplace=True)
     return df
 

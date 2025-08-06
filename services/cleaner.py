@@ -2,6 +2,7 @@
 
 import logging
 
+# get a module-specific logger
 logger = logging.getLogger(__name__)
 
 def drop_duplicates(df):
@@ -11,6 +12,6 @@ def drop_duplicates(df):
     removed = before - len(df)
 
     if removed:
-        logger.info(f"Removed {removed} duplicate PNR records")
+        logger.info("Removed %d duplicate PNR records", removed)
 
     return df

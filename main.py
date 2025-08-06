@@ -5,6 +5,13 @@ from services.transformer import convert_fares, add_total
 from services.validator import validate_airports
 from services.cleaner import drop_duplicates
 from services.exporter import export_cleaned
+import logging
+import sys
+
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s — %(message)s")
 
 def main():
     # Load the synthetic data
