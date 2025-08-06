@@ -1,10 +1,19 @@
 # This module validates flight data records based on airport codes.
+import logging
+
+logger = logging.getLogger(__name__)
 
 VALID_AIRPORTS = {"LAX", "JFK", "ORD", "ATL", "DFW", "DEN", "SFO", "SEA", "MIA", "PHX"}
 
 def validate_airports(df):
     # Drops records with invalid airports
+    invalid_origins = set(df["Origin"]) - VALID_AIRPORTS
+    invalid_destinations = set(df["Destination"]) - VALID_AIRPORTS
+
+    if invalid_origins or invalid_destinations:
+        logger.error(f"Invalid Origins: {invalid_origins}, Destinations: {invalid_destinations}")
+
     return df[
         df["Origin"].isin(VALID_AIRPORTS) &
         df["Destination"].isin(VALID_AIRPORTS)
-    ]
+        ].copy()
