@@ -13,7 +13,7 @@ def convert_fares(df):
 
     if invalid_number:
         logger.warning("%d invalid fares coerced to NaN", invalid_number)
-    df["Fare"].fillna(df["Fare"].median(), inplace=True)
+    df["Fare"] = df["Fare"].fillna(df["Fare"].median())
     return df
 
 def add_total(df, tax_rate):

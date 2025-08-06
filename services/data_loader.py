@@ -12,5 +12,6 @@ def load_reservations(filepath):
 
     if missing_number:
         logger.info("Filling %d missing Passenger names", missing_number)
-    df["Passenger"].fillna("Unknown Passenger", inplace=True)
+
+    df["Passenger"] = df["Passenger"].fillna("Unknown Passenger")
     return df
