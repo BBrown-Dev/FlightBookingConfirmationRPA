@@ -1,7 +1,9 @@
 # This module contains functions to transform the DataFrame.
-from venv import logger
-import pandas as pd
 
+import pandas as pd
+import logging
+
+logger = logging.getLogger(__name__)
 
 def convert_fares(df):
     # Converts Fare column to float.

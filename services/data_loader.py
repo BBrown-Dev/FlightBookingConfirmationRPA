@@ -1,7 +1,9 @@
 # This module reads a CSV file into a DataFrame.
-from venv import logger
 
 import pandas as pd
+import logging
+
+logger = logging.getLogger(__name__)
 
 def load_reservations(filepath):
     df = pd.read_csv(filepath)
